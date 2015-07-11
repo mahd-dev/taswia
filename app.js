@@ -1,7 +1,6 @@
 
 fs = require('fs');
 path = require('path');
-var http = require('http');
 var express = require('express');
 
 // import modules
@@ -20,6 +19,6 @@ fs.readdirSync('modules').filter(function(file) { return fs.statSync(path.join('
 Object.keys(mod).forEach(function (m) { if(typeof(mod[m].start) == 'function') mod[m].start() });
 
 // starting server
-http.createServer(mod.server).listen(mod.server.get('port'), function(){
+mod.server.listen(mod.server.get('port'), function(){
   console.log(new Date().toISOString() + ' : Server listening on port ' + mod.server.get('port'));
 });
