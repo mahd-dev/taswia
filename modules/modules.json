@@ -1,0 +1,5 @@
+{
+  modules : [
+    {name: 'master', version: '1.0.0.0', entry: 'index.js', dependencies: []}
+  ]
+}
