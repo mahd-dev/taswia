@@ -7,6 +7,7 @@
     min-height: 120px;
   transition: box-shadow .2s ease;
   -webkit-backface-visibility: hidden;
+  z-index: 1;
 }
 
 .topnavbar>.navbar-header {
@@ -119,17 +120,6 @@
   }
 }
 
-.search-form .form-control {
-  border-color: transparent;
-}
-
-.search-form .input-group-addon {
-  border-color: transparent;
-  background-color: transparent;
-  padding-left: 0;
-  padding-right: 0;
-}
-
 .nav-wrapper {
   padding: 0 15px;
 }
@@ -213,6 +203,8 @@ body {
   z-index: 310;
   transition: all .35s ease 0s;
   will-change: margin;
+  background-color: #fff;
+  box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
 }
 
 .app-container>section {
@@ -307,14 +299,6 @@ body {
   }
 }
 
-.aside-offscreen .app-container>section,.aside-offscreen .app-container>footer {
-  margin-left: 0;
-}
-
-.aside-offscreen .app-container>aside {
-  margin-left: -240px;
-}
-
 .csstransforms3d .app-container {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -337,6 +321,7 @@ body {
 
 .layout-material .app-container>aside {
   position: fixed;
+  overflow-x: hidden;
 }
 
 .layout-material .app-container>header {
@@ -372,7 +357,7 @@ body {
     padding-top: 0;
     top: 0;
     right: 25px;
-    left: 239px;
+    left: 240px;
     margin-top: 60px;
     margin-left: 0;
     max-width: none;
@@ -398,19 +383,44 @@ body {
     min-height: 100%;
     padding-bottom: 20px;
   }
-
+}
 .sidebar-wrapper {
   height: 100%;
-  width: inherit;
   overflow-x: hidden;
+  overflow-y: scroll;
+  width: calc(100% + 17px);
   background-color: inherit;
 }
 
-.sidebar-wrapper hr {
-  margin: 10px 5px;
-  border-top-color: rgba(0,0,0,.15);
+.sidebar-wrapper ul>li>a {
+  display: block;
+  cursor: pointer;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0 1rem;
 }
 
+.sidebar-wrapper ul>li>a:hover {
+  background-color: #f9f9f9;
+}
+
+.collapsible-header i {
+  width: inherit !important;
+  font-size: inherit !important;
+  line-height: 3rem !important;
+  display: block !important;
+  float: right !important;
+  margin-right: inherit !important;
+}
+
+.sidebar-wrapper .collapsible{
+  box-shadow: none;
+}
+
+.sidebar-wrapper .collapsible.collapsible-accordion{
+  border-right: none !important;
+  border-left: none !important;
+}
 @media print {
   .app-container,.app-container>section,.app {
     margin: 0!important;
