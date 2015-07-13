@@ -19,6 +19,11 @@
   background-color: #f8f8f8;
 }
 
+.sidebar-wrapper .sidebar {
+  background-color: #fff;
+  box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+}
+
 @media only screen and (max-width:768px) {
   .topnavbar{
     position: relative;
@@ -203,8 +208,6 @@ body {
   z-index: 310;
   transition: all .35s ease 0s;
   will-change: margin;
-  background-color: #fff;
-  box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
 }
 
 .app-container>section {
@@ -350,6 +353,7 @@ body {
     top: 120px;
     z-index: 0;
     margin-left: 0!important;
+    margin-bottom: 25px;
   }
 
   .layout-material .app-container>section {
