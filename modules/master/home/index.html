@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="/assets/css/materialize.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
 
+    <script type="text/javascript" src="/assets/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bin/materialize.min.js"></script>
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+
   </head>
   <body class="layout-material">
     <!-- Main container-->
@@ -30,23 +34,28 @@
         <!-- END navbar header-->
       </nav>
       <!-- END Top Navbar-->
-
-      <aside class="bg-white hidden">
+      <aside class="hidden">
         <!-- START Sidebar-->
         <div class="sidebar-wrapper">
           <div data-ui-sidebar="" class="sidebar">
             <div class="sidebar-nav navbar-collapse">
-              <ul class="collapsible" data-collapsible="accordion">
+              <ul>
+                <li><a href="#!" class="waves-effect waves-dark btn-flat">First Sidebar Link</a></li>
+                <li><a href="#!" class="waves-effect waves-dark btn-flat">Second Sidebar Link</a></li>
                 <li>
-                  <div class="collapsible-header">First</div>
-                  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-                <li>
-                  <div class="collapsible-header">Second</div>
-                  <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
-                </li>
-                <li>
-                  <a class="collapsible-header" href="aaa">Third</a>
+                  <ul class="collapsible collapsible-accordion">
+                    <li>
+                      <a class="collapsible-header waves-effect waves-dark btn-flat">Dropdown<i class="fa fa-angle-down"></i></a>
+                      <div class="collapsible-body">
+                        <ul>
+                          <li><a href="#!" class="waves-effect waves-dark btn-flat">First</a></li>
+                          <li><a href="#!" class="waves-effect waves-dark btn-flat">Second</a></li>
+                          <li><a href="#!" class="waves-effect waves-dark btn-flat">Third</a></li>
+                          <li><a href="#!" class="waves-effect waves-dark btn-flat">Fourth</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
@@ -70,8 +79,5 @@
       </section>
     </div>
     <div class="bg-overlay"></div>
-    <script type="text/javascript" src="/assets/js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="/assets/js/bin/materialize.min.js"></script>
-    <script type="text/javascript" src="/assets/js/app.js"></script>
   </body>
 </html>
