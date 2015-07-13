@@ -15,6 +15,7 @@ module.exports = {
   },
 
   // public classes
-  template: require("./core/template.js")
-  
+  article: require("./core/article.js"),
+  category: require("./core/category.js")
+
 };

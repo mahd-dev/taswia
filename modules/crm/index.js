@@ -15,6 +15,6 @@ module.exports = {
   },
 
   // public classes
-  template: require("./core/template.js")
-  
+  contact: require("./core/contact.js")
+
 };

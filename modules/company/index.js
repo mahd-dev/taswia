@@ -15,6 +15,7 @@ module.exports = {
   },
 
   // public classes
-  template: require("./core/template.js")
+  company: require("./core/company.js"),
+  user: require("./core/user.js")
   
 };
