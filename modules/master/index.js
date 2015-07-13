@@ -3,10 +3,9 @@ module.exports = {
   // will be started later after loading module
   init: function (argument) {
     // body...
-    console.log(__dirname + '/assets');
-    mod.server.use('/assets',mod.express.static(__dirname + '/assets'));
+    mod.server.use('/assets', mod.express.static(__dirname + '/assets'));
     mod.server.get("/", function (req, res) {
-      res.send("hello");
+      res.sendFile(__dirname + "/home/index.html");
     });
 
   },

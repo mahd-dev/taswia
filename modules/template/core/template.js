@@ -1,10 +1,10 @@
 
 // constructor function
-var template = function (id) {
+var template = function (oid) {
 
   // template variables
-  var idi = idi;
-  var name = "default value";
+  this.oid = oid;
+  this.name = "default value";
 
 };
 
@@ -12,7 +12,7 @@ var template = function (id) {
 template.prototype = {
 
   // read only property
-  get id () { return this._idi;},
+  get id () { return this._oid;},
 
   // read & write property
   get name () { return this._name;},
