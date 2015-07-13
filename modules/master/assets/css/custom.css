@@ -1,0 +1,6 @@
+.btn.focus, .btn:focus, .btn:hover{
+  color: #fff;
+}
+.btn, .btn-large, .btn-flat{
+  text-transform: none;
+}
