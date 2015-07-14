@@ -16,7 +16,14 @@ contact.prototype = {
   set id_company (value) { this._id_company = value; },
 
   get company () { return new mod.company.company(this._id_company); },
-  set company (value) { this._id_company = value.id; }
+  set company (value) { this._id_company = value.id; },
+
+  get sales () { return [new mod.sale.sale()]; },
+  get purchases () { return [new mod.purchase.purchase()]; },
+  get refunds () { return [new mod.refund.refund()]; },
+  get orders () { return [new mod.order.order()]; },
+  get quotes () { return [new mod.quote.quote()]; }
+
 };
 
 contact.new = function (company) {

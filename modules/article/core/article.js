@@ -41,7 +41,14 @@ article.prototype = {
   set id_category (value) { this._id_category = value; },
 
   get category () { return new mod.article.category(this._id_category); },
-  set category (value) { this._id_category = value.id; }
+  set category (value) { this._id_category = value.id; },
+
+  get refund_articles () { return [new mod.refund.refund_article()]; },
+  get sale_articles () { return [new mod.sale.sale_article()]; },
+  get purchase_articles () { return [new mod.purchase.purchase_article()]; },
+  get quote_articles () { return [new mod.quote.quote_article()]; },
+  get order_articles () { return [new mod.order.order_article()]; }
+
 };
 
 article.new = function (company) {

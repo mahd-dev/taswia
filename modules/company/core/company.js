@@ -14,7 +14,14 @@ company.prototype = {
 
   get users () { return [new mod.company.user()]; },
   get articles () { return [new mod.company.article()]; },
-  get contacts () { return [new mod.crm.contact()]; }
+  get contacts () { return [new mod.crm.contact()]; },
+  get sales () { return [new mod.sale.sale()]; },
+  //
+  get purchases () { return [new mod.company.purchase()]; },
+  get refunds () { return [new mod.company.refund()]; },
+  get quotes () { return [new mod.company.quote()]; },
+  get orders () { return [new mod.company.order()]; }
+
 };
 
 company.new = function () {
