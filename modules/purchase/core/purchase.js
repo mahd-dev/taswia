@@ -25,7 +25,7 @@ purchase.prototype = {
   set id_recipt (value) { this._id_recipt = value; },
 
   get company () { return new mod.company.company(this._id_company); },
-  set company (value) { this._id_company = value.id; }
+  set company (value) { this._id_company = value.id; },
 
   get contact () { return new mod.crm.contact(this._id_contact); },
   set contact (value) { this._id_contact = value.id; },

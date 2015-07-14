@@ -5,7 +5,7 @@ var sale_article = function (oid) {
 
 };
 
-user.prototype = {
+sale_article.prototype = {
 
   get id () { return this._oid;},
 
