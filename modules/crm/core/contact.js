@@ -19,10 +19,12 @@ contact.prototype = {
   set company (value) { this._id_company = value.id; },
 
   get sales () { return [new mod.sale.sale()]; },
+  get sale_orders () { return [new mod.sale.order()]; },
+  get sale_refunds () { return [new mod.sale.refund()]; },
+  get sale_quotes () { return [new mod.sale.quote()]; },
   get purchases () { return [new mod.purchase.purchase()]; },
-  get refunds () { return [new mod.refund.refund()]; },
-  get orders () { return [new mod.order.order()]; },
-  get quotes () { return [new mod.quote.quote()]; }
+  get purchase_orders () { return [new mod.purchase.order()]; },
+  get purchase_refunds () { return [new mod.purchase.refund()]; }
 
 };
 

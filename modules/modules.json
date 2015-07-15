@@ -8,9 +8,6 @@
     {"name": "crm"},
     {"name": "sale"},
     {"name": "purchase"},
-    {"name": "quote"},
-    {"name": "order"},
-    {"name": "refund"},
     {"name": "payment"}
   ]
 }

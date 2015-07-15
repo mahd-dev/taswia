@@ -24,7 +24,7 @@ refund.prototype = {
   get contact () { return new mod.crm.contact(this._id_contact); },
   set contact (value) { this._id_contact = value.id; },
 
-  get refund_articles () { return [new mod.refund.refund_article()]; }
+  get refund_articles () { return [new mod.sale.refund_article()]; }
 
 };
 

@@ -18,7 +18,7 @@ order_article.prototype = {
   get id_article () { return this._id_article;},
   set id_article (value) { this._id_article = value; },
 
-  get order () { return new mod.order.order(this._id_order); },
+  get order () { return new mod.sale.order(this._id_order); },
   set order (value) { this._id_order = value.id; },
 
   get article () { return new mod.article.article(this._id_article); },

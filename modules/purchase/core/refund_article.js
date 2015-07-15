@@ -18,7 +18,7 @@ refund_article.prototype = {
   get id_article () { return this._id_article;},
   set id_article (value) { this._id_article = value; },
 
-  get refund () { return new mod.refund.refund(this._id_refund); },
+  get refund () { return new mod.purchase.refund(this._id_refund); },
   set refund (value) { this._id_refund = value.id; },
 
   get article () { return new mod.article.article(this._id_article); },
