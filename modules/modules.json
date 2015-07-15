@@ -1,5 +1,16 @@
 {
-  modules : [
-    {name: 'master', version: '1.0.0.0', entry: 'index.js', dependencies: []}
+  "modules" : [
+    {"name": "db", "async":true, "entry": "{modules_root}/primary/mongodb/index.js"},
+    {"name": "server", "entry": "{modules_root}/primary/express/index.js"},
+    {"name": "master", "entry": "{modules_root}/primary/master/index.js"},
+    {"name": "company"},
+    {"name": "article"},
+    {"name": "crm"},
+    {"name": "sale"},
+    {"name": "purchase"},
+    {"name": "quote"},
+    {"name": "order"},
+    {"name": "refund"},
+    {"name": "payment"}
   ]
 }

@@ -1,24 +1,34 @@
+// importing modules
+mod={};
+var fs = require('fs');
+var modules_config = JSON.parse(fs.readFileSync('./modules/modules.json', 'utf8'));
+var i = 0;
+var load_next = function () {
+  if(modules_config.modules.length > i){
+    var my_module = modules_config.modules[i];
+    process.stdout.write(new Date().toISOString() + " : Loading " + my_module.name + " ... ");
+    if(my_module.async){
+      mod[my_module.name] = require((my_module.entry?my_module.entry.replace('{modules_root}', './modules'):'./modules/' + my_module.name + '/index.js'))(function () {
+        if(typeof(mod[my_module.name].init) == 'function') mod[my_module.name].init();
+        process.stdout.write(" done\n");
+        i+=1;
+        load_next();
+      });
+    }else{
+      mod[my_module.name] = require((my_module.entry?my_module.entry.replace('{modules_root}', './modules'):'./modules/' + my_module.name + '/index.js'));
+      if(typeof(mod[my_module.name].init) == 'function') mod[my_module.name].init();
+      process.stdout.write(" done\n");
+      i+=1;
+      load_next();
+    }
+  }else{
+    start_modules();
+  }
+};load_next();
 
-fs = require('fs');
-path = require('path');
-var express = require('express');
-
-// import modules
-mod = {
-  express: express,
-  server: express()
-};
-
-mod.server.set('port', process.env.PORT || 3000);
-
-fs.readdirSync('modules').filter(function(file) { return fs.statSync(path.join('modules', file)).isDirectory(); }).forEach(function (item) {
-  mod[item] = require('./modules/' + item + '/index.js');
-  if(typeof(mod[item].init) == 'function') mod[item].init();
-});
 // start imported modules
-Object.keys(mod).forEach(function (m) { if(typeof(mod[m].start) == 'function') mod[m].start() });
-
-// starting server
-mod.server.listen(mod.server.get('port'), function(){
-  console.log(new Date().toISOString() + ' : Server listening on port ' + mod.server.get('port'));
-});
+var start_modules = function () {
+  Object.keys(mod).forEach(function (m) { if(typeof(mod[m].start) == 'function') {
+    mod[m].start();
+  }});
+};
