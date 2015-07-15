@@ -43,11 +43,13 @@ article.prototype = {
   get category () { return new mod.article.category(this._id_category); },
   set category (value) { this._id_category = value.id; },
 
-  get refund_articles () { return [new mod.refund.refund_article()]; },
   get sale_articles () { return [new mod.sale.sale_article()]; },
+  get sale_order_articles () { return [new mod.sale.order_article()]; },
+  get sale_refund_articles () { return [new mod.sale.refund_article()]; },
+  get sale_quote_articles () { return [new mod.sale.quote_article()]; },
   get purchase_articles () { return [new mod.purchase.purchase_article()]; },
-  get quote_articles () { return [new mod.quote.quote_article()]; },
-  get order_articles () { return [new mod.order.order_article()]; }
+  get purchase_order_articles () { return [new mod.purchase.order_article()]; },
+  get purchase_refund_articles () { return [new mod.purchase.refund_article()]; }
 
 };
 

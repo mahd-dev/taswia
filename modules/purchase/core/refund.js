@@ -1,11 +1,11 @@
-var order = function (oid) {
+var refund = function (oid) {
 
   this.oid = oid;
   this.number = "default value";
 
 };
 
-order.prototype = {
+refund.prototype = {
 
   get id () { return this._oid;},
 
@@ -24,12 +24,12 @@ order.prototype = {
   get contact () { return new mod.crm.contact(this._id_contact); },
   set contact (value) { this._id_contact = value.id; },
 
-  get order_articles () { return [new mod.order.order_article()]; }
+  get refund_articles () { return [new mod.purchase.refund_article()]; }
 
 };
 
-order.new = function (contact) {
-  return new order(1);
+refund.new = function (contact) {
+  return new refund(1);
 };
 
-module.exports = order;
+module.exports = refund;

@@ -18,6 +18,10 @@ module.exports = {
   purchase: require("./core/purchase.js"),
   purchase_article: require("./core/purchase_article.js"),
   recipt: require("./core/recipt.js"),
-  invoice: require("./core/invoice.js")
+  invoice: require("./core/invoice.js"),
+  order: require("./core/order.js"),
+  order_article: require("./core/order_article.js"),
+  refund: require("./core/refund.js"),
+  refund_article: require("./core/refund_article.js")
 
 };

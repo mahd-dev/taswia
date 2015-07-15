@@ -1,11 +1,11 @@
-var quote = function (oid) {
+var order = function (oid) {
 
   this.oid = oid;
   this.number = "default value";
 
 };
 
-quote.prototype = {
+order.prototype = {
 
   get id () { return this._oid;},
 
@@ -24,12 +24,12 @@ quote.prototype = {
   get contact () { return new mod.crm.contact(this._id_contact); },
   set contact (value) { this._id_contact = value.id; },
 
-  get quote_articles () { return [new mod.quote.quote_article()]; }
+  get order_articles () { return [new mod.purchase.order_article()]; }
 
 };
 
-quote.new = function (contact) {
-  return new quote(1);
+order.new = function (contact) {
+  return new order(1);
 };
 
-module.exports = quote;
+module.exports = order;

@@ -18,7 +18,7 @@ quote_article.prototype = {
   get id_article () { return this._id_article;},
   set id_article (value) { this._id_article = value; },
 
-  get quote () { return new mod.quote.quote(this._id_quote); },
+  get quote () { return new mod.sale.quote(this._id_quote); },
   set quote (value) { this._id_quote = value.id; },
 
   get article () { return new mod.article.article(this._id_article); },
