@@ -1,6 +1,4 @@
 
-
-
 module.exports = function (callback) {
   var fs = require('fs');
   try {
@@ -14,7 +12,10 @@ module.exports = function (callback) {
       console.log('Error connecting to database : ' + err);
       process.exit(-1);
     }else{
-      if(mod.db) mod.db.db = rslt_db;
+      if(mod.db){
+        module.db = rslt_db;
+        mod.db.db = rslt_db;
+      }
       else module.db = rslt_db;
     }
     callback();
