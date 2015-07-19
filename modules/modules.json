@@ -1,6 +1,6 @@
 {
   "modules" : [
-    {"name": "db", "async":true, "entry": "{modules_root}/primary/mongodb/index.js"},
+    {"name": "db", "async_init":true, "entry": "{modules_root}/primary/mongodb/index.js"},
     {"name": "server", "entry": "{modules_root}/primary/express/index.js"},
     {"name": "master", "entry": "{modules_root}/primary/master/index.js"},
     {"name": "company"},

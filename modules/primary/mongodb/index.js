@@ -13,17 +13,17 @@ module.exports = function (callback) {
       process.exit(-1);
     }else{
       if(mod.db){
-        module.db = rslt_db;
-        mod.db.db = rslt_db;
+        module.mongodb = rslt_db;
+        mod.db.mongodb = rslt_db;
       }
-      else module.db = rslt_db;
+      else module.mongodb = rslt_db;
     }
     callback();
   });
 
   return {
 
-    db: module.db,
+    mongodb: module.mongodb,
     insert: require("./core/insert.js"),
     update: require("./core/update.js"),
     delete: require("./core/delete.js"),

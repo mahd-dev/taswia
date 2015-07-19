@@ -5,6 +5,9 @@ module.exports = {
     mod.server.router.get("/", function (req, res) {
       res.sendFile(__dirname + "/home/index.html");
     });
+    mod.server.router.get("/test", function (req, res) {
+      res.sendFile(__dirname + "/home/test.html");
+    });
   }
 
 };

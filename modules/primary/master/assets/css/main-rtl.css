@@ -35,7 +35,8 @@
     padding-top: 25px !important;
   }
   .app-container>aside.hidden {
-    left: -240px;
+    right: -250px;
+    right: calc(0px + -240px);
   }
 }
 
@@ -112,7 +113,7 @@
 }
 
 .topnavbar .sidebar-toggle {
-  float: left;
+  float: right;
 }
 
 .topnavbar .menu-toggle {
@@ -174,6 +175,11 @@ html {
 body {
   overflow-x: hidden;
   height: 100%;
+  direction: rtl;
+}
+
+.pull-right{
+  float: left !important;
 }
 
 .bg-overlay{
@@ -202,9 +208,11 @@ body {
 .app-container>aside {
   position: absolute;
   top: 70px;
-  left: 0;
+  right: -10px;
+  right: calc(0% + 0px);
   bottom: 0;
-  width: 240px;
+  width: 250px;
+  width: calc(0px + 240px);
   z-index: 310;
   transition: all .35s ease 0s;
   will-change: margin;
@@ -360,8 +368,8 @@ body {
     position: absolute;
     padding-top: 0;
     top: 0;
-    right: 25px;
-    left: 240px;
+    right: 240px;
+    left: 25px;
     margin-top: 60px;
     margin-left: 0;
     max-width: none;
@@ -393,7 +401,7 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   width: 250px;
-  width: calc(100% + 10px);
+  width: calc(100% + 12px);
   background-color: inherit;
 }
 
@@ -414,7 +422,7 @@ body {
   font-size: inherit !important;
   line-height: 3rem !important;
   display: block !important;
-  float: right !important;
+  float: left !important;
   margin-right: inherit !important;
 }
 
@@ -444,7 +452,6 @@ body {
     color: #e6e9ee!important;
   }
 }
-
 ::-webkit-scrollbar {
   width: 5px;
 }

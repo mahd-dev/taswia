@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/main-rtl.css">
     <link rel="stylesheet" href="/assets/css/materialize.css">
     <link rel="stylesheet" href="/assets/css/custom.css">
 
@@ -40,7 +40,7 @@
           <div data-ui-sidebar="" class="sidebar">
             <div class="sidebar-nav navbar-collapse">
               <ul>
-                <li><a href="#!" class="waves-effect waves-dark btn-flat">First Sidebar Link</a></li>
+                <li><a href="" class="waves-effect waves-dark btn-flat">First Sidebar Link</a></li>
                 <li><a href="#!" class="waves-effect waves-dark btn-flat">Second Sidebar Link</a></li>
                 <li>
                   <ul class="collapsible collapsible-accordion">
@@ -79,5 +79,17 @@
       </section>
     </div>
     <div class="bg-overlay"></div>
+
+    <script>
+      native.inspect();
+      function callback() {
+        alert('function called from c++');
+      }
+      $("button").click(function () {
+        native.display('hello');
+        native.inspect();
+      })
+    </script>
+
   </body>
 </html>
