@@ -1,5 +1,6 @@
 var user = function (oid) {
-
+  if (!(this instanceof user)) return new user();
+  
   this.oid = oid;
 };
 

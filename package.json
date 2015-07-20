@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "Enterprise Ressources Planning",
   "main": "app.js",
-  "dependencies": {
-    "express": "^4.13.1",
-    "mongodb": "^2.0.39"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -15,7 +15,7 @@ var load_next = function () {
       mod[my_module.name] = require(( // add module's public results to main modules object
         my_module.entry? // modules's config provides an entry file
         my_module.entry.replace('{modules_root}', './modules') // so start it
-        :'./modules/' + my_module.name + '/index.js') // else we start a predefined entry
+        :'./modules/' + my_module.name) // else we start a predefined entry
       )(function () { // this function will be provided to mdule's entry as a callback, so it will run our callback after it finishes it's job
           if(typeof(mod[my_module.name].init) == 'function') mod[my_module.name].init(); // run module's inti function if it's neccesary
           process.stdout.write(" done\n");
@@ -26,7 +26,7 @@ var load_next = function () {
       mod[my_module.name] = require((  // add module's public results to main modules object, but this time without providing callback function
         my_module.entry?
         my_module.entry.replace('{modules_root}', './modules')
-        :'./modules/' + my_module.name + '/index.js')
+        :'./modules/' + my_module.name)
       );
       if(typeof(mod[my_module.name].init) == 'function') mod[my_module.name].init(); // run module's inti function if it's neccesary
       process.stdout.write(" done\n");
