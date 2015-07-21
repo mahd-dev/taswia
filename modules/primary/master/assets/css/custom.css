@@ -4,3 +4,6 @@
 .btn, .btn-large, .btn-flat{
   text-transform: none;
 }
+body.login section{
+  left: 25px !important;
+}

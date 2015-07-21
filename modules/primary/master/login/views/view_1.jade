@@ -1,0 +1,37 @@
+doctype html
+html.no-js(lang='en')
+  head
+    meta(charset='utf-8')
+    title Login - taswia
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/assets/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/assets/css/main.css')
+    link(rel='stylesheet', href='/assets/css/materialize.css')
+    link(rel='stylesheet', href='/assets/css/custom.css')
+    script(type='text/javascript', src='/assets/js/jquery-2.1.4.min.js')
+    script(type='text/javascript', src='/assets/js/bin/materialize.min.js')
+    script(type='text/javascript', src='/assets/js/app.js')
+  body.layout-material.login
+    .app-container
+      nav.navbar.topnavbar(role='navigation')
+        .navbar-header
+          a.navbar-brand(href='dashboard.html')
+            // <img src="images/logo.png" alt="App Logo" class="brand-logo">
+      section
+        .row
+          form.login_form.col.m6.offset-m3.l4.offset-l4.s12
+            .card
+              .row
+                .input-field.col.s12
+                  input#username.validate(type='text', name='username')
+                  label(for='username')!= tr.username
+              .row
+                .input-field.col.s12
+                  input#password.validate(type='password', name='password')
+                  label(for='password')!= tr.password
+              .row
+                .input-field.col.s12
+                  button.login_btn.waves-effect.waves-teal.btn Button
+    .bg-overlay
+    script(type='text/javascript', src='/login/public/script_1.js')

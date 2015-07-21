@@ -1,0 +1,12 @@
+{
+  "ar": {
+    "username": "إسم المستخدم"
+  },
+  "en": {
+    "username": "Username",
+    "password": "Password"
+  },
+  "fr": {
+    "username": "Nom d'utlisateur"
+  }
+}

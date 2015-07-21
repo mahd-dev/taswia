@@ -1,6 +1,6 @@
 
 // --- importing modules --- //
-mod={};
+mod ={};
 // read modules list
 var fs = require('fs');
 var modules_config = JSON.parse(fs.readFileSync('./modules/modules.json', 'utf8'));

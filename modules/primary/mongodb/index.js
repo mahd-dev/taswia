@@ -6,8 +6,9 @@ module.exports = function (callback) {
   } catch (e) {}
 
   var MongoClient = require('mongodb').MongoClient;
+  var url = (config?config.connect:null) || 'mongodb://localhost:27017/taswia';
 
-  MongoClient.connect((config?config.connect:null) || 'mongodb://localhost:27017/taswia', function (err, rslt_db) {
+  MongoClient.connect(url, function (err, rslt_db) {
     if(err){
       console.log('Error connecting to database : ' + err);
       process.exit(-1);
@@ -23,6 +24,7 @@ module.exports = function (callback) {
 
   return {
 
+    url : url,
     mongodb: module.mongodb,
     insert: require("./core/insert.js"),
     update: require("./core/update.js"),

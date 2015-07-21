@@ -1,6 +1,21 @@
 module.express = require('express');
+module.bodyParser = require('body-parser');
+module.cookieParser = require('cookie-parser');
+module.session = require('express-session');
+module.mongoStore = require('connect-mongo')(module.session);
+
 module.app = module.express();
 module.router = module.express.Router();
+
+module.app.use(module.bodyParser.json());
+module.app.use(module.bodyParser.urlencoded({ extended: true }));
+module.app.use(module.cookieParser());
+module.app.use(module.session({
+  resave: true,
+  saveUninitialized: true,
+  store: new module.mongoStore(),
+  secret: require('crypto').randomBytes(64).toString("hex")
+}));
 
 var fs = require('fs');
 try {
@@ -8,6 +23,7 @@ try {
 } catch (e) {}
 module.app.set('port', process.env.PORT || (config?config.port:null) || 8175);
 module.app.use(module.router);
+module.app.set('view engine', 'jade');
 
 module.exports = {
   start: function () {
