@@ -28,7 +28,8 @@ module.exports = function (callback) {
     insert: require("./core/insert.js"),
     update: require("./core/update.js"),
     delete: require("./core/delete.js"),
-    find: require("./core/find.js")
+    find: require("./core/find.js"),
+    findone: require("./core/findone.js")
 
   };
 };
