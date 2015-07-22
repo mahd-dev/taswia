@@ -9,11 +9,10 @@ mod.server.router.get("/login", function (req, res) {
 
 mod.server.router.post("/login", function (req, res) {
   console.log(req.body);
-  ///res.send(req.params.username);
-  /*var t = mod.db.find("user", { username: req.username }, {_id: 1, password: 1});
-  if (t.count()) {
-    if (req.password == t.next().password) {
+  var user = mod.db.find("user", { username: req.body.username }, {_id: 1, password: 1});
+  if (user.count()) {
+    if (req.body.password == user.next().password) {
       res.send({"success":true});
     }
-  }*/
+  }
 });
