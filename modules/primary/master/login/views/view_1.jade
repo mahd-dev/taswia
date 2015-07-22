@@ -23,19 +23,26 @@ html.no-js(lang='en')
             .card
               .row
                 .col.s12
-                  h4.header Login
+                  h4.header!= tr.title
               .row
                 .input-field.col.s12
-                  input#username.validate(type='text', name='username')
-                  label(for='username', data-error='wrong')!= tr.username
+                  input#username.validate(type='text', name='username', required)
+                  label(for='username', data-error=tr.username_error)!= tr.username
               .row
                 .input-field.col.s12
-                  input#password.validate(type='password', name='password')
-                  label(for='password', data-error='wrong')!= tr.password
+                  input#password.validate(type='password', name='password', required)
+                  label(for='password', data-error=tr.password_error)!= tr.password
               .row
                 .input-field.col.s12
-                  button.login_btn.waves-effect.waves-light.btn.right Login
-              .progress(style='display:none')
-                .indeterminate
+                  button.login_btn.waves-effect.waves-light.btn.right
+                    .preloader-wrapper.small.hide
+                      .spinner-layer.spinner-blue-only.force-white
+                        .circle-clipper.left
+                          .circle
+                        .gap-patch
+                          .circle
+                        .circle-clipper.right
+                          .circle
+                    span!= tr.login_btn
     .bg-overlay
     script(type='text/javascript', src='/assets/login/script_1.js')

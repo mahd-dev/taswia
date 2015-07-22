@@ -1,12 +1,26 @@
 {
   "ar": {
-    "username": "إسم المستخدم"
+    "title": "تسجيل الدخول",
+    "username": "إسم المستخدم",
+    "username_error": "إسم المستخدم غير موجود",
+    "password": "كلمة السر",
+    "password_error": "كلمة السر غير صحيحة",
+    "login_btn": "دخول"
   },
   "en": {
-    "username": "Username",
-    "password": "Password"
+    "title": "Login",
+    "username": "Password",
+    "username_error": "Username not exists",
+    "password": "Password",
+    "password_error": "Invalid password",
+    "login_btn": "login"
   },
   "fr": {
-    "username": "Nom d'utlisateur"
+    "title": "Se connecter",
+    "username": "Nom d'utilisateur",
+    "username_error": "Nom d'utilisateur inconnu",
+    "password": "Mot de passe",
+    "password_error": "Mot de passe invalid",
+    "login_btn": "Se connecter"
   }
 }
