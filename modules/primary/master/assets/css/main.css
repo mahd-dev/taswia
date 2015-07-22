@@ -27,6 +27,7 @@
 @media only screen and (max-width:768px) {
   .topnavbar{
     position: relative;
+    min-height: initial;
   }
   .layout-material .app-container>aside{
     position: absolute !important;
@@ -80,7 +81,6 @@
 
 .topnavbar .mobile-toggles {
   position: absolute!important;
-  right: 0;
   left: 0;
   top: 0;
   height: 70px;
@@ -126,7 +126,7 @@
 }
 
 .nav-wrapper {
-  padding: 0 15px;
+  padding: 0 25px;
 }
 
 .nav-wrapper.in {
@@ -452,5 +452,5 @@ body {
   background: #eee;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #9c27b0;
+  background-color: #00bcd4;
 }

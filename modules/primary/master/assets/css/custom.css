@@ -6,4 +6,5 @@
 }
 body.login section{
   left: 25px !important;
+  height: auto !important;
 }

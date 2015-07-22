@@ -24,7 +24,6 @@ module.exports = function (callback) {
 
   return {
 
-    url : url,
     mongodb: module.mongodb,
     insert: require("./core/insert.js"),
     update: require("./core/update.js"),

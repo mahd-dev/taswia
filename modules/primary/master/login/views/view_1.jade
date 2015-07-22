@@ -6,8 +6,8 @@ html.no-js(lang='en')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/assets/css/font-awesome.min.css')
-    link(rel='stylesheet', href='/assets/css/main.css')
     link(rel='stylesheet', href='/assets/css/materialize.css')
+    link(rel='stylesheet', href='/assets/css/main.css')
     link(rel='stylesheet', href='/assets/css/custom.css')
     script(type='text/javascript', src='/assets/js/jquery-2.1.4.min.js')
     script(type='text/javascript', src='/assets/js/bin/materialize.min.js')
@@ -23,6 +23,9 @@ html.no-js(lang='en')
           form.login_form.col.m6.offset-m3.l4.offset-l4.s12
             .card
               .row
+                .col.s12
+                  h4.header Login
+              .row
                 .input-field.col.s12
                   input#username.validate(type='text', name='username')
                   label(for='username')!= tr.username
@@ -32,5 +35,10 @@ html.no-js(lang='en')
                   label(for='password')!= tr.password
               .row
                 .input-field.col.s12
+<<<<<<< HEAD
                   button.login_btn.waves-effect.waves-teal.btn Button
+=======
+                  button.login_btn.waves-effect.waves-light.btn.right Login
+    .bg-overlay
+>>>>>>> 3e99a7b7ded42a0ff011e2499cbe6f68610cf799
     script(type='text/javascript', src='/login/public/script_1.js')
