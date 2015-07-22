@@ -6,7 +6,6 @@ module.mongoStore = require('connect-mongo')(module.session);
 
 module.app = module.express();
 module.router = module.express.Router();
-
 module.app.use(module.bodyParser.json());
 module.app.use(module.bodyParser.urlencoded({ extended: true }));
 module.app.use(module.cookieParser());
