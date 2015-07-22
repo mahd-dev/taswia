@@ -15,7 +15,7 @@ module.exports = function (collection, document, editor, writeConcern, ordered){
     };
   }
 
-  return module.parent.mongodb[collection].insert(
+  return module.parent.mongodb.collection(collection).insert(
     document,
     {
       writeConcern: writeConcern,

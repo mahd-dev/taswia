@@ -3,7 +3,7 @@ module.exports = function (collection, query, update, editor, upsert, multi, wri
     query["_id._id"] = query._id;
     unset(query._id);
   };
-  module.parent.mongodb[module.parent.mongodb[collection]].update(
+  module.parent.mongodb.collection(collection).update(
     query,
     {
       $inc: {"_id.version": 1}
@@ -12,12 +12,12 @@ module.exports = function (collection, query, update, editor, upsert, multi, wri
   );
 
   var data = [];
-  module.parent.mongodb[module.parent.mongodb[collection]].find(query).forEach(function (item) {
+  module.parent.mongodb.collection(collection).find(query).forEach(function (item) {
     item._id.version = 0;
     item._id.editor = editor;
     data.push(item);
   });
-  module.parent.mongodb[collection].insert(
+  module.parent.mongodb.collection(collection).insert(
     data,
     {
       writeConcern: writeConcern,
@@ -26,7 +26,7 @@ module.exports = function (collection, query, update, editor, upsert, multi, wri
   );
 
   query["_id.version"] = 0;
-  return module.parent.mongodb[collection].update(
+  return module.parent.mongodb.collection(collection).update(
     query,
     update,
     {
