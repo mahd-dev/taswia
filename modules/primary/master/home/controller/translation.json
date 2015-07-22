@@ -1,8 +1,11 @@
 {
   "ar": {
+    "logout": "خروج"
   },
   "en": {
+    "logout": "Logout"
   },
   "fr": {
+    "logout": "Se déconnecter"
   }
 }
