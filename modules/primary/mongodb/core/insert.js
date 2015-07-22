@@ -1,25 +1,31 @@
 var oid = require('mongodb').ObjectID;
 
-module.exports = function (collection, document, editor, writeConcern, ordered){
-  if(document._id !== undefined) {
-    document._id = {
-      _id: document._id,
+var render = function (doc, editor){
+  if(doc._id !== undefined) {
+    doc._id = {
+      _id: doc._id,
       version: 0,
       editor: editor
     };
   }else{
-    document._id = {
+    doc._id = {
       _id: new oid(),
       version: 0,
       editor: editor
     };
   }
+}
+
+module.exports = function (collection, docs, editor, options, callback){
+  if( Object.prototype.toString.call( docs ) === '[object Array]' ) {
+    docs.forEach(function (doc) {
+      render(doc, editor);
+    });
+  }else render(docs, editor);
 
   return module.parent.mongodb.collection(collection).insert(
-    document,
-    {
-      writeConcern: writeConcern,
-      ordered: ordered
-    }
+    docs,
+    options,
+    callback
   );
 };
