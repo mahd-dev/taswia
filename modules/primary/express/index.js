@@ -13,7 +13,7 @@ module.app.use(module.cookieParser());
 module.app.use(module.session({
   resave: true,
   saveUninitialized: true,
-  store: new module.mongoStore({url: mod.db.url}),
+  store: new module.mongoStore({db: mod.db.mongodb}),
   secret: require('crypto').randomBytes(64).toString("hex")
 }));
 
