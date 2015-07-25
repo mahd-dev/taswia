@@ -11,6 +11,7 @@ module.exports = {
     require("./home/controller");
     require("./login/controller");
     require("./test/controller");
+    require("./login_/controller");
   }
 
 };
