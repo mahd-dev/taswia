@@ -1,0 +1,120 @@
+<dom-module id="master-layout">
+
+  <link rel="stylesheet" href="/assets/bower_components/angular-material/angular-material.min.css">
+  <link rel="stylesheet" href="/assets/css/material-design-icons.min.css">
+
+  <style>
+    paper-drawer-panel:not([narrow]) #navicon {
+      display: none;
+    }
+    .md-toolbar-logo{
+      height: 30px;
+    }
+    .main-container{
+      height: 100%;
+      overflow: hidden;
+    }
+    .main-toolbar{
+      z-index: 3;
+    }
+    .content{
+      z-index: 0;
+    }
+    [md-component-id=sidenav]:not(.md-closed){
+      padding-top: 64px;
+    }
+  </style>
+
+  <template>
+    <div layout="column" ng-app="master-layout-app" ng-controller="master-layout-ctrl" class="main-container">
+      <md-toolbar layout="row" class="main-toolbar md-whiteframe-z1">
+        <div class="md-toolbar-tools">
+
+          <img src="/assets/img/logo-dark.svg" alt="logo" class="md-toolbar-logo"/>
+
+          <md-button class="md-icon-button" aria-label="menu toggler" ng-click="toggle_sidenav()">
+            <md-icon class="material-icons">menu</md-icon>
+          </md-button>
+
+          <span flex></span>
+
+          <md-button class="md-icon-button" aria-label="Favorite">
+            <md-icon class="material-icons">face</md-icon>
+          </md-button>
+
+          <md-menu>
+            <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu()">
+              <md-icon class="material-icons">more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="doSomething()">Do Something</md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+
+        </div>
+      </md-toolbar>
+
+      <section flex layout="row" class="content">
+
+        <md-sidenav md-component-id="sidenav" class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-lg') && lock_sidenav">
+          <md-content layout-padding>
+            This sidenav is locked open on your device. To go back to the default behavior,
+            narrow your display.
+          </md-content>
+        </md-sidenav>
+
+        <div layout="column" flex role="main">
+          <md-toolbar md-scroll-shrink class="md-tall">
+            <div class="md-toolbar-tools">
+              <h2>
+                <span>Toolbar with Icon Buttons</span>
+              </h2>
+              <span flex></span>
+            </div>
+          </md-toolbar>
+
+          <md-content flex layout-align="start start" layout-padding>
+
+            <md-input-container>
+              <label>Submission Date</label>
+              <input type="date" ng-model="user.submissionDate">
+            </md-input-container>
+            <p style="height:1000px;">
+
+            </p>
+
+          </md-content>
+
+        </div>
+      </section>
+    </div>
+  </template>
+
+  <script src="/assets/bower_components/angular/angular.min.js"></script>
+  <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="/assets/bower_components/angular-material/angular-material.min.js"></script>
+
+  <script>
+    Polymer({
+      is: "master-layout",
+      created: function () {
+        angular
+          .module('master-layout-app', ['ngMaterial'])
+          .controller('master-layout-ctrl', function ($scope, $mdSidenav, $mdMedia) {
+            $scope.lock_sidenav = $mdMedia('gt-lg');
+            $scope.toggle_sidenav = function () {
+              $scope.lock_sidenav = !$scope.lock_sidenav;
+              if(!$mdMedia('gt-lg')){
+                if($scope.lock_sidenav) $mdSidenav('sidenav').open();
+                else $mdSidenav('sidenav').close();
+              }
+            }
+          })
+      }
+    });
+  </script>
+
+</dom-module>

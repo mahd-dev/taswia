@@ -2,7 +2,7 @@
   "modules" : [
     {"name": "db", "async_init":true, "entry": "{modules_root}/primary/mongodb"},
     {"name": "server", "entry": "{modules_root}/primary/express"},
-    {"name": "master", "entry": "{modules_root}/primary/master"},
+    {"name": "ui", "entry": "{modules_root}/primary/ui"},
     {"name": "company"},
     {"name": "article"},
     {"name": "crm"},
