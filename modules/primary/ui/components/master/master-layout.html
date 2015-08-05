@@ -58,18 +58,87 @@
 
       <section flex layout="row" class="content">
 
-        <md-sidenav md-component-id="sidenav" class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-lg') && lock_sidenav">
-          <md-content layout-padding>
-            This sidenav is locked open on your device. To go back to the default behavior,
-            narrow your display.
+        <md-sidenav md-component-id="sidenav" class="md-sidenav-left md-whiteframe-z1" md-is-locked-open="$mdMedia('gt-lg') && lock_sidenav">
+
+          <md-content flex role="navigation">
+
+            <style>
+
+              md-sidenav ul{
+                padding: 0;
+                overflow: hidden;
+                transform: scaleY(0);
+                max-height: 0px;
+                transform-origin: top;
+                -webkit-transition: transform 0.2s, max-height 0.2s;
+                -moz-transition: transform 0.2s, max-height 0.2s;
+                -ms-transition: transform 0.2s, max-height 0.2s;
+                -o-transition: transform 0.2s, max-height 0.2s;
+                transition: transform 0.2s, max-height 0.2s;
+              }
+              md-sidenav>md-content>ul{
+                transform: scaleY(1);
+                max-height: 99999999px;
+                cursor: pointer;
+              }
+              md-sidenav li.expanded>ul{
+                transform: scaleY(1);
+                max-height: 99999999px;
+              }
+              md-sidenav li{
+                border-top: 1px solid transparent;
+                border-bottom: 1px solid transparent;
+              }
+              md-sidenav li.expanded.has-childrens{
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+              }
+              md-sidenav li:not(.expanded)>div[toggleparentclass=expanded] .state_expanded{
+                display: none;
+              }
+              md-sidenav li.expanded>div[toggleparentclass=expanded] .state_collapsed{
+                display: none;
+              }
+              md-sidenav li:not(.has-childrens)>div[toggleparentclass=expanded] .state_collapsed{
+                display: none;
+              }
+              md-sidenav li:not(.has-childrens)>div[toggleparentclass=expanded] .state_expanded{
+                display: none;
+              }
+              md-sidenav md-list-item>md-icon{
+                margin: 0 !important;
+              }
+              .hide{
+                display: none;
+              }
+            </style>
+
+            <script type="text/ng-template" id="menu_template">
+              <div toggleparentclass="expanded">
+                <md-list-item md-ink-ripple layout="row" layout-align="space-between center">
+                  {{ menu.title }}
+                  <md-icon class="state_expanded md-secondary material-icons">keyboard_arrow_up</md-icon>
+                  <md-icon class="state_collapsed md-secondary material-icons">keyboard_arrow_down</md-icon>
+                </md-list-item>
+              </div>
+              <ul ng-if="menu.sub_menu" ngClass="{'hide': menu.sub_menu}">
+                <li ng-repeat="menu in menu.sub_menu" ng-include="'menu_template'" ng-Class="{'has-childrens': menu.sub_menu}"></li>
+              </ul>
+            </script>
+
+            <ul>
+              <li ng-repeat="menu in side_menu" ng-include="'menu_template'" ng-Class="{'has-childrens': menu.sub_menu}"></li>
+            </ul>
+
           </md-content>
+
         </md-sidenav>
 
         <div layout="column" flex role="main">
           <md-toolbar md-scroll-shrink class="md-tall">
             <div class="md-toolbar-tools">
               <h2>
-                <span>Toolbar with Icon Buttons</span>
+                <span>Title</span>
               </h2>
               <span flex></span>
             </div>
@@ -100,21 +169,61 @@
   <script>
     Polymer({
       is: "master-layout",
-      created: function () {
-        angular
-          .module('master-layout-app', ['ngMaterial'])
-          .controller('master-layout-ctrl', function ($scope, $mdSidenav, $mdMedia) {
-            $scope.lock_sidenav = $mdMedia('gt-lg');
-            $scope.toggle_sidenav = function () {
-              $scope.lock_sidenav = !$scope.lock_sidenav;
-              if(!$mdMedia('gt-lg')){
-                if($scope.lock_sidenav) $mdSidenav('sidenav').open();
-                else $mdSidenav('sidenav').close();
-              }
-            }
-          })
-      }
+      created: function () { }
     });
+
+    angular.module('master-layout-app', ['ngMaterial'])
+      .controller('master-layout-ctrl', function ($scope, $mdSidenav, $mdMedia) {
+        $scope.lock_sidenav = $mdMedia('gt-lg');
+        $scope.toggle_sidenav = function () {
+          $scope.lock_sidenav = !$scope.lock_sidenav;
+          if(!$mdMedia('gt-lg')){
+            if($scope.lock_sidenav) $mdSidenav('sidenav').open();
+            else $mdSidenav('sidenav').close();
+          }
+        }
+
+        $scope.side_menu = [
+          {
+            title: "item1",
+            sub_menu: [
+              {
+                title: "item1.1",
+                sub_menu: [
+                  {
+                    title: "item1.1.1"
+                  }
+                ]
+              },
+              {
+                title: "item1.2"
+              }
+            ]
+          },
+          {
+            title: "item2"
+          },
+          {
+            title: "item3"
+          },
+          {
+            title: "item4"
+          }
+        ];
+
+      })
+      .directive('toggleparentclass', function () {
+        var link = function (scope, element, attrs) {
+          element.bind('click', function () {
+            console.log([element, element.parent()]);
+            element.parent().toggleClass(attrs.toggleparentclass);
+          });
+        };
+        return {
+          restrict: 'A',
+          link: link
+        };
+      })
   </script>
 
 </dom-module>

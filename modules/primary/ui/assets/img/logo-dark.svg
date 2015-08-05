@@ -10,8 +10,8 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1326.2271"
-   height="390"
+   width="1406.2271"
+   height="404.00003"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
@@ -169,9 +169,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="662.31282"
-     inkscape:cy="346.36215"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="293.80885"
+     inkscape:cy="277.87695"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -190,9 +190,9 @@
      inkscape:snap-object-midpoints="true"
      inkscape:snap-center="true"
      inkscape:snap-page="true"
-     inkscape:window-width="1547"
+     inkscape:window-width="1600"
      inkscape:window-height="876"
-     inkscape:window-x="1653"
+     inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      width="1052.36px"
@@ -208,7 +208,7 @@
        enabled="true"
        snapvisiblegridlinesonly="true"
        originx="-188.85723px"
-       originy="-136.99879px" />
+       originy="-136.99878px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -226,10 +226,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-188.85723,-525.36339)">
+     transform="translate(-188.85723,-511.36338)">
     <g
        id="g4009-2"
-       transform="matrix(2.5084945,0,0,2.5084945,-1178.0371,-1659.7705)">
+       transform="matrix(2.5084945,0,0,2.5084945,-1178.0371,-1673.7705)">
       <path
          inkscape:transform-center-y="2.3725693e-05"
          transform="matrix(0.95130296,0,0,0.95130296,141.17827,45.382715)"
@@ -262,14 +262,15 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:339.03240967px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#e8eaf6;fill-opacity:1;stroke:none;font-family:DIN Next LT Arabic;-inkscape-font-specification:DIN Next LT Arabic Light"
-       x="597.56189"
-       y="821.88184"
-       id="text4057-3"
+       style="font-size:309.28631591999999273px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#e8eaf6;fill-opacity:1;stroke:none;font-family:Sans"
+       x="675.68231"
+       y="825.27216"
+       id="text3023"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan4059-6"
-         x="597.56189"
-         y="821.88184">taswia</tspan></text>
+         id="tspan3025"
+         x="675.68231"
+         y="825.27216"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:JF Flat;-inkscape-font-specification:JF Flat;fill:#e8eaf6;fill-opacity:1">taswia</tspan></text>
   </g>
 </svg>

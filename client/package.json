@@ -1,0 +1,11 @@
+{
+  "name": "taswia-client",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {
+    "electron-prebuilt": "^0.30.2"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}
