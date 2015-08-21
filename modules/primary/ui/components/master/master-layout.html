@@ -3,31 +3,103 @@
   <link rel="stylesheet" href="/assets/bower_components/angular-material/angular-material.min.css">
   <link rel="stylesheet" href="/assets/css/material-design-icons.min.css">
 
+  <!--<link rel="stylesheet" href="/assets/fonts/flat_font_jzoor/font.css">-->
+  <link rel="stylesheet" href="/assets/fonts/default/default.css">
   <style>
-    paper-drawer-panel:not([narrow]) #navicon {
-      display: none;
+    *{
+      font-family: "default";
     }
+  </style>
+
+  <style>
+
     .md-toolbar-logo{
       height: 30px;
     }
     .main-container{
       height: 100%;
-      overflow: hidden;
+      overflow-y: scroll;
+      background-color: #eee;
     }
     .main-toolbar{
-      z-index: 3;
+      position: fixed;
+      z-index: 1;
     }
     .content{
-      z-index: 0;
+      z-index: 2;
+      padding: 0 16px;
+      margin-left: 0;
+      -webkit-transition: margin 0.1s ease-out;
+      -moz-transition: margin 0.1s ease-out;
+      -ms-transition: margin 0.1s ease-out;
+      -o-transition: margin 0.1s ease-out;
+      transition: margin 0.1s ease-out;
     }
-    [md-component-id=sidenav]:not(.md-closed){
-      padding-top: 64px;
+    .content.margin{
+      margin-left: calc(304px - 16px);
+    }
+    .paper{
+      background-color: #fff;
+    }
+    section{
+      margin-top: 64px;
+      min-height: calc(100% - 64px);
+    }
+    section[style]{
+      height: 0;
+    }
+    md-sidenav{
+      position: fixed !important;
+      overflow-x: hidden;
+      z-index: 0;
+      margin-top: 128px;
+      background-color: #eee;
+      -webkit-transition: all 0.1s ease-out !important;
+      -moz-transition: all 0.1s ease-out !important;
+      -ms-transition: all 0.1s ease-out !important;
+      -o-transition: all 0.1s ease-out !important;
+      transition: all 0.1s ease-out !important;
+    }
+    md-sidenav>md-content{
+      width: calc(100% + 5px);
+      background-color: #eee;
+      overflow-y: scroll;
+    }
+    [md-component-id=sidenav]{
+      margin-right: -16px;
+    }
+    @media screen and (max-width:959px) {
+      md-sidenav{
+        z-index: 60;
+        margin-top: 0;
+      }
+    }
+    .footer{
+      margin: 5px 0;
+      color: rgba(0, 0, 0, 0.75);
+      cursor: default;
+    }
+    .footer i{
+      font-size: inherit;
+      color: rgba(194, 24, 91, 0.75);
     }
   </style>
 
   <template>
-    <div layout="column" ng-app="master-layout-app" ng-controller="master-layout-ctrl" class="main-container">
-      <md-toolbar layout="row" class="main-toolbar md-whiteframe-z1">
+    <style>
+      ::-webkit-scrollbar{
+        width: 5px;
+        margin-top: 200px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.2);/*transparent;*/
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    </style>
+    <md-content flex layout-align="start start" ng-app="master-layout-app" ng-controller="master-layout-ctrl" class="main-container">
+      <md-toolbar layout="row" class="main-toolbar md-tall md-whiteframe-z1">
         <div class="md-toolbar-tools">
 
           <img src="/assets/img/logo-dark.svg" alt="logo" class="md-toolbar-logo"/>
@@ -56,9 +128,9 @@
         </div>
       </md-toolbar>
 
-      <section flex layout="row" class="content">
+      <section flex layout="row">
 
-        <md-sidenav md-component-id="sidenav" class="md-sidenav-left md-whiteframe-z1" md-is-locked-open="$mdMedia('gt-lg') && lock_sidenav">
+        <md-sidenav md-component-id="sidenav" class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-md') && lock_sidenav">
 
           <md-content flex role="navigation">
 
@@ -68,41 +140,48 @@
                 padding: 0;
                 overflow: hidden;
                 transform: scaleY(0);
-                max-height: 0px;
+                height: 0px;
                 transform-origin: top;
-                -webkit-transition: transform 0.2s, max-height 0.2s;
-                -moz-transition: transform 0.2s, max-height 0.2s;
-                -ms-transition: transform 0.2s, max-height 0.2s;
-                -o-transition: transform 0.2s, max-height 0.2s;
-                transition: transform 0.2s, max-height 0.2s;
+                -webkit-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+                -moz-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+                -ms-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+                -o-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+                transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
               }
               md-sidenav>md-content>ul{
                 transform: scaleY(1);
-                max-height: 99999999px;
+                height: auto;
                 cursor: pointer;
               }
               md-sidenav li.expanded>ul{
                 transform: scaleY(1);
-                max-height: 99999999px;
               }
               md-sidenav li{
                 border-top: 1px solid transparent;
                 border-bottom: 1px solid transparent;
+                margin-bottom: -1px;
               }
               md-sidenav li.expanded.has-childrens{
-                border-top: 1px solid #eee;
-                border-bottom: 1px solid #eee;
+                border-top: 1px solid #d8d8d8;
+                border-bottom: 1px solid #d8d8d8;
+                background-color: rgba(255,255,255,0.25);
+                -webkit-transition: all 0.1s;
+                -moz-transition: all 0.1s;
+                -ms-transition: all 0.1s;
+                -o-transition: all 0.1s;
+                transition: all 0.1s;
               }
-              md-sidenav li:not(.expanded)>div[toggleparentclass=expanded] .state_expanded{
-                display: none;
+              md-sidenav .state{
+                -webkit-transition: transform 0.3s;
+                -moz-transition: transform 0.3s;
+                -ms-transition: transform 0.3s;
+                -o-transition: transform 0.3s;
+                transition: transform 0.3s;
               }
-              md-sidenav li.expanded>div[toggleparentclass=expanded] .state_collapsed{
-                display: none;
+              md-sidenav li.expanded>div[toggleparentclass=expanded] .state{
+                transform: rotateX(180deg) translate(0,12px);
               }
-              md-sidenav li:not(.has-childrens)>div[toggleparentclass=expanded] .state_collapsed{
-                display: none;
-              }
-              md-sidenav li:not(.has-childrens)>div[toggleparentclass=expanded] .state_expanded{
+              md-sidenav li:not(.has-childrens)>div[toggleparentclass=expanded] .state{
                 display: none;
               }
               md-sidenav md-list-item>md-icon{
@@ -117,8 +196,7 @@
               <div toggleparentclass="expanded">
                 <md-list-item md-ink-ripple layout="row" layout-align="space-between center">
                   {{ menu.title }}
-                  <md-icon class="state_expanded md-secondary material-icons">keyboard_arrow_up</md-icon>
-                  <md-icon class="state_collapsed md-secondary material-icons">keyboard_arrow_down</md-icon>
+                  <md-icon class="state md-secondary material-icons">keyboard_arrow_down</md-icon>
                 </md-list-item>
               </div>
               <ul ng-if="menu.sub_menu" ngClass="{'hide': menu.sub_menu}">
@@ -126,47 +204,41 @@
               </ul>
             </script>
 
-            <ul>
+            <ul class="main-menu">
               <li ng-repeat="menu in side_menu" ng-include="'menu_template'" ng-Class="{'has-childrens': menu.sub_menu}"></li>
             </ul>
 
           </md-content>
 
         </md-sidenav>
-
-        <div layout="column" flex role="main">
-          <md-toolbar md-scroll-shrink class="md-tall">
-            <div class="md-toolbar-tools">
-              <h2>
-                <span>Title</span>
-              </h2>
-              <span flex></span>
-            </div>
-          </md-toolbar>
-
-          <md-content flex layout-align="start start" layout-padding>
-
+        <div flex layout="column" class="content" ng-class="{'margin': lock_sidenav}">
+          <md-content flex class="paper md-whiteframe-z1" layout-padding>
             <md-input-container>
               <label>Submission Date</label>
               <input type="date" ng-model="user.submissionDate">
             </md-input-container>
-            <p style="height:1000px;">
-
-            </p>
-
+            <md-button class="md-raised">Default</md-button>
+            <md-button class="md-raised md-primary">Primary</md-button>
+            <md-button class="md-raised md-accent">Accent</md-button>
+            <p>aaa</p>
           </md-content>
-
+          <div class="md-caption footer" layout="row" layout-align="end end">
+            <span>Crafted with love <i class="material-icons md-captiont">favorite</i>, by mahd</span>
+          </div>
         </div>
       </section>
-    </div>
+    </md-content>
   </template>
+
+  <script src="/socket.io/socket.io.js"></script>
 
   <script src="/assets/bower_components/angular/angular.min.js"></script>
   <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
   <script src="/assets/bower_components/angular-material/angular-material.min.js"></script>
+  <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
 
-  <script>
+  <script type="text/javascript">
     Polymer({
       is: "master-layout",
       created: function () { }
@@ -174,14 +246,16 @@
 
     angular.module('master-layout-app', ['ngMaterial'])
       .controller('master-layout-ctrl', function ($scope, $mdSidenav, $mdMedia) {
-        $scope.lock_sidenav = $mdMedia('gt-lg');
+        $scope.lock_sidenav = $mdMedia('gt-md');
         $scope.toggle_sidenav = function () {
-          $scope.lock_sidenav = !$scope.lock_sidenav;
-          if(!$mdMedia('gt-lg')){
-            if($scope.lock_sidenav) $mdSidenav('sidenav').open();
-            else $mdSidenav('sidenav').close();
-          }
+          if(!$mdMedia('gt-md')) {
+            $scope.lock_sidenav = false;
+            $mdSidenav('sidenav').open();
+          } else $scope.lock_sidenav = !$scope.lock_sidenav;
         }
+        $scope.$watch(function() { return $mdMedia('gt-md'); }, function(med) {
+          $scope.lock_sidenav = med;
+        });
 
         $scope.side_menu = [
           {
@@ -196,7 +270,15 @@
                 ]
               },
               {
-                title: "item1.2"
+                title: "item1.2",
+                sub_menu: [
+                  {
+                    title: "item1.2.1"
+                  }
+                ]
+              },
+              {
+                title: "item1.3"
               }
             ]
           },
@@ -215,8 +297,20 @@
       .directive('toggleparentclass', function () {
         var link = function (scope, element, attrs) {
           element.bind('click', function () {
-            console.log([element, element.parent()]);
-            element.parent().toggleClass(attrs.toggleparentclass);
+            var ul = angular.element(element.parent('li').find('ul')[0]);
+            if(element.parent().hasClass(attrs.toggleparentclass)){
+              ul.css('height', ul.prop('scrollHeight') + 'px');
+              setTimeout(function () {
+                element.parent().removeClass(attrs.toggleparentclass);
+                ul.css('height', '0px');
+              },100);
+            }else{
+              ul.css('height', ul.prop('scrollHeight') + 'px');
+              element.parent().addClass(attrs.toggleparentclass);
+              setTimeout(function () {
+                ul.css('height', 'auto');
+              }, 200);
+            }
           });
         };
         return {
@@ -224,6 +318,12 @@
           link: link
         };
       })
+      /*.config(function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+          //.dark()
+          .primaryPalette('indigo')
+          .accentPalette('pink');
+      })*/
   </script>
 
 </dom-module>

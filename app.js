@@ -3,7 +3,11 @@
 mod ={};
 // read modules list
 var fs = require('fs');
-var modules_config = JSON.parse(fs.readFileSync('./modules/modules.json', 'utf8'));
+try {
+  var modules_config = JSON.parse(fs.readFileSync('./modules/modules.json', 'utf8'));
+} catch (e) {
+  var modules_config = {};
+}
 
 // loop on modules found
 var i = 0;

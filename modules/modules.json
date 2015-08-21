@@ -1,7 +1,7 @@
 {
   "modules" : [
-    {"name": "db", "async_init":true, "entry": "{modules_root}/primary/mongodb"},
-    {"name": "server", "entry": "{modules_root}/primary/express"},
+    {"name": "db", "async_init":true, "entry": "{modules_root}/primary/db"},
+    {"name": "server", "entry": "{modules_root}/primary/server"},
     {"name": "ui", "entry": "{modules_root}/primary/ui"},
     {"name": "company"},
     {"name": "article"},
