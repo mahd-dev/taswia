@@ -23,6 +23,12 @@ module.iosync = module.iosync({
   server: module.server,
   session: module.session
 });
+module.router.get("/iosync/iosync.js", function (req, res) {
+  res.sendFile(require.resolve("iosync/client.js"));
+});
+module.router.get("/iosync/json-patch.js", function (req, res) {
+  res.sendFile(require.resolve("iosync/node_modules/fast-json-patch/dist/json-patch-duplex.min.js"));
+})
 
 var fs = require('fs');
 try {

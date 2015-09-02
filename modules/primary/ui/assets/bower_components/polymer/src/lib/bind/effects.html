@@ -20,53 +20,86 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
              ;
     },
 
-    annotationEffect: function(source, value, effect) {
+    _annotationEffect: function(source, value, effect) {
       if (source != effect.value) {
-        value = this.getPathValue(effect.value);
-        this._data[effect.value] = value;
+        value = this.get(effect.value);
+        this.__data__[effect.value] = value;
       }
       var calc = effect.negate ? !value : value;
-      return this._applyEffectValue(calc, effect);
+      // For better interop, dirty check before setting when custom events
+      // are used, since the target element may not dirty check (e.g. <input>)
+      if (!effect.customEvent ||
+          this._nodes[effect.index][effect.name] !== calc) {
+        return this._applyEffectValue(calc, effect);
+      }
     },
 
-    reflectEffect: function(source) {
+    _reflectEffect: function(source) {
       this.reflectPropertyToAttribute(source);
     },
 
-    notifyEffect: function(source) {
-      this._notifyChange(source);
-    },
-
-    // Raw effect for extension; effect.function is an actual function
-    functionEffect: function(source, value, effect, old) {
-      effect.function.call(this, source, value, effect, old);
-    },
-
-    observerEffect: function(source, value, effect, old) {
-      this[effect.method](value, old);
-    },
-
-    complexObserverEffect: function(source, value, effect) {
-      var args = Polymer.Bind._marshalArgs(this._data, effect, source, value);
-      if (args) {
-        this[effect.method].apply(this, args);
+    _notifyEffect: function(source, value, effect, old, fromAbove) {
+      if (!fromAbove) {
+        this._notifyChange(source);
       }
     },
 
-    computeEffect: function(source, value, effect) {
-      var args = Polymer.Bind._marshalArgs(this._data, effect, source, value);
-      if (args) {
-        this[effect.property] = this[effect.method].apply(this, args);
+    // Raw effect for extension
+    _functionEffect: function(source, value, fn, old, fromAbove) {
+      fn.call(this, source, value, old, fromAbove);
+    },
+
+    _observerEffect: function(source, value, effect, old) {
+      var fn = this[effect.method];
+      if (fn) {
+        fn.call(this, value, old);
+      } else {
+        this._warn(this._logf('_observerEffect', 'observer method `' +
+          effect.method + '` not defined'));
       }
     },
 
-    annotatedComputationEffect: function(source, value, effect) {
-      var args = Polymer.Bind._marshalArgs(this._data, effect, source, value);
+    _complexObserverEffect: function(source, value, effect) {
+      var fn = this[effect.method];
+      if (fn) {
+        var args = Polymer.Bind._marshalArgs(this.__data__, effect, source, value);
+        if (args) {
+          fn.apply(this, args);
+        }
+      } else {
+        this._warn(this._logf('_complexObserverEffect', 'observer method `' +
+          effect.method + '` not defined'));
+      }
+    },
+
+    _computeEffect: function(source, value, effect) {
+      var args = Polymer.Bind._marshalArgs(this.__data__, effect, source, value);
       if (args) {
-        var computedHost = this._rootDataHost || this;
-        var computedvalue = 
-          computedHost[effect.method].apply(computedHost, args);
-        this._applyEffectValue(computedvalue, effect);
+        var fn = this[effect.method];
+        if (fn) {
+          this.__setProperty(effect.property, fn.apply(this, args));
+        } else {
+          this._warn(this._logf('_computeEffect', 'compute method `' +
+            effect.method + '` not defined'));
+        }
+      }
+    },
+
+    _annotatedComputationEffect: function(source, value, effect) {
+      var computedHost = this._rootDataHost || this;
+      var fn = computedHost[effect.method];
+      if (fn) {
+        var args = Polymer.Bind._marshalArgs(this.__data__, effect, source, value);
+        if (args) {
+          var computedvalue = fn.apply(computedHost, args);
+          if (effect.negate) {
+            computedvalue = !computedvalue;
+          }
+          this._applyEffectValue(computedvalue, effect);
+        }
+      } else {
+        computedHost._warn(computedHost._logf('_annotatedComputationEffect',
+          'compute method `' + effect.method + '` not defined'));
       }
     },
 
@@ -78,16 +111,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       for (var i=0, l=args.length; i<l; i++) {
         var arg = args[i];
         var name = arg.name;
-        var v = arg.structured ?
-          Polymer.Base.getPathValue(name, model) : model[name];
-        if (v === undefined) {
+        var v;
+        if (arg.literal) {
+          v = arg.value;
+        } else if (arg.structured) {
+          v = Polymer.Base.get(name, model);
+        } else {
+          v = model[name];
+        }
+        if (args.length > 1 && v === undefined) {
           return;
         }
         if (arg.wildcard) {
           // Only send the actual path changed info if the change that
           // caused the observer to run matched the wildcard
           var baseChanged = (name.indexOf(path + '.') === 0);
-          var matches = (effect.arg.name.indexOf(name) === 0 && !baseChanged);
+          var matches = (effect.trigger.name.indexOf(name) === 0 && !baseChanged);
           values[i] = {
             path: matches ? path : name,
             value: matches ? value : v,

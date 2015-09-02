@@ -1,0 +1,57 @@
+md-sidenav ul{
+  padding: 0;
+  overflow: hidden;
+  transform: scaleY(0);
+  height: 0px;
+  transform-origin: top;
+  -webkit-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+  -moz-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+  -ms-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+  -o-transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out, height 0.1s ease-in-out;
+}
+md-sidenav>md-content>ul>li:last-child{
+  margin-bottom: 0;
+}
+md-sidenav>md-content>ul{
+  transform: scaleY(1);
+  height: auto;
+  cursor: pointer;
+}
+md-sidenav li.expanded>ul{
+  transform: scaleY(1);
+}
+md-sidenav li{
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+}
+md-sidenav li.expanded.has-childrens{
+  border-top: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+  background-color: rgba(255,255,255,0.25);
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  -ms-transition: all 0.1s;
+  -o-transition: all 0.1s;
+  transition: all 0.1s;
+}
+md-sidenav .state{
+  -webkit-transition: transform 0.3s;
+  -moz-transition: transform 0.3s;
+  -ms-transition: transform 0.3s;
+  -o-transition: transform 0.3s;
+  transition: transform 0.3s;
+}
+md-sidenav li.expanded>div[toggleparentclass=expanded] .state{
+  transform: rotateX(180deg) translate(0,7.5px);
+}
+md-sidenav li:not(.has-childrens)>div[toggleparentclass=expanded] .state{
+  display: none;
+}
+md-sidenav md-list-item>md-icon{
+  margin: 0 !important;
+}
+.hide{
+  display: none;
+}

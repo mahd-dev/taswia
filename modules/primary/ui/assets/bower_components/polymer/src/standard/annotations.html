@@ -15,15 +15,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <script>
 
 /**
- * Scans a template to produce an annotation object that stores expression 
- * metadata along with information to associate the metadata with nodes in an 
+ * Scans a template to produce an annotation object that stores expression
+ * metadata along with information to associate the metadata with nodes in an
  * instance.
  *
- * Elements with `id` in the template are noted and marshaled into an 
- * the `$` hash in an instance. 
- * 
+ * Elements with `id` in the template are noted and marshaled into an
+ * the `$` hash in an instance.
+ *
  * Example
- * 
+ *
  *     &lt;template>
  *       &lt;div id="foo">&lt;/div>
  *     &lt;/template>
@@ -34,7 +34,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  *        }
  *      });
  *     &lt;/script>
- * 
+ *
  * Other expressions that are noted include:
  *
  * Double-mustache annotations in text content. The annotation must be the only
@@ -55,8 +55,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
  *     <[tag] on-<event-name>="{{hostMethodName}}"><[tag]>
  *
  * Note: **the `annotations` feature does not actually implement the behaviors
- * associated with these expressions, it only captures the data**. 
- * 
+ * associated with these expressions, it only captures the data**.
+ *
  * Other optional features contain actual data implementations.
  *
  * @class standard feature: annotations
@@ -123,9 +123,73 @@ TODO(sjmiles): this module should produce either syntactic metadata
       } else {
         // TODO(sorvell): ad hoc method of plugging behavior into Annotations
         Polymer.Annotations.prepElement = this._prepElement.bind(this);
-        this._notes = Polymer.Annotations.parseAnnotations(this._template);
+        if (this._template._content && this._template._content._notes) {
+          this._notes = this._template._content._notes;
+        }  else {
+          this._notes = Polymer.Annotations.parseAnnotations(this._template);
+        }
+        this._processAnnotations(this._notes);
         Polymer.Annotations.prepElement = null;
       }
+    },
+
+    _processAnnotations: function(notes) {
+      for (var i=0; i<notes.length; i++) {
+        var note = notes[i];
+        // Parse bindings for methods & path roots (models)
+        for (var j=0; j<note.bindings.length; j++) {
+          var b = note.bindings[j];
+          b.signature = this._parseMethod(b.value);
+          if (!b.signature) {
+            b.model = this._modelForPath(b.value);
+          }
+        }
+        // Recurse into nested templates & bind parent props
+        if (note.templateContent) {
+          this._processAnnotations(note.templateContent._notes);
+          var pp = note.templateContent._parentProps =
+            this._discoverTemplateParentProps(note.templateContent._notes);
+          var bindings = [];
+          for (var prop in pp) {
+            bindings.push({
+              index: note.index,
+              kind: 'property',
+              mode: '{',
+              name: '_parent_' + prop,
+              model: prop,
+              value: prop
+            });
+          }
+          note.bindings = note.bindings.concat(bindings);
+        }
+      }
+    },
+
+    // Finds all bindings in template content and stores the path roots in
+    // the path members in content._parentProps. Each outer template merges
+    // inner _parentProps to propagate inner parent property needs to outer
+    // templates.
+    _discoverTemplateParentProps: function(notes) {
+      var pp = {};
+      notes.forEach(function(n) {
+        // Find all bindings to parent.* and spread them into _parentPropChain
+        n.bindings.forEach(function(b) {
+          if (b.signature) {
+            var args = b.signature.args;
+            for (var k=0; k<args.length; k++) {
+              pp[args[k].model] = true;
+            }
+          } else {
+            pp[b.model] = true;
+          }
+        });
+        // Merge child _parentProps into this _parentProps
+        if (n.templateContent) {
+          var tpp = n.templateContent._parentProps;
+          Polymer.Base.mixin(pp, tpp);
+        }
+      });
+      return pp;
     },
 
     _prepElement: function(element) {
@@ -134,7 +198,7 @@ TODO(sjmiles): this module should produce either syntactic metadata
 
     // instance-time
 
-    findAnnotatedNode: Polymer.Annotations.findAnnotatedNode,
+    _findAnnotatedNode: Polymer.Annotations.findAnnotatedNode,
 
     // marshal all teh things
     _marshalAnnotationReferences: function() {
@@ -150,14 +214,15 @@ TODO(sjmiles): this module should produce either syntactic metadata
       this._configureTemplateContent();
     },
 
-    // nested template contents have been stored prototypically to avoid 
-    // unnecessary duplication, here we put references to the 
+    // nested template contents have been stored prototypically to avoid
+    // unnecessary duplication, here we put references to the
     // indirected contents onto the nested template instances
     _configureTemplateContent: function() {
-      this._notes.forEach(function(note) {
+      this._notes.forEach(function(note, i) {
         if (note.templateContent) {
-          var template = this.findAnnotatedNode(this.root, note);
-          template._content = note.templateContent;
+          // note: we can rely on _nodes being set here and having the same
+          // index as _notes
+          this._nodes[i]._content = note.templateContent;
         }
       }, this);
     },
@@ -167,7 +232,7 @@ TODO(sjmiles): this module should produce either syntactic metadata
       this.$ = {};
       this._notes.forEach(function(a) {
         if (a.id) {
-          this.$[a.id] = this.findAnnotatedNode(this.root, a);
+          this.$[a.id] = this._findAnnotatedNode(this.root, a);
         }
       }, this);
     },
@@ -176,7 +241,7 @@ TODO(sjmiles): this module should produce either syntactic metadata
     _marshalAnnotatedNodes: function() {
       if (this._nodes) {
         this._nodes = this._nodes.map(function(a) {
-          return this.findAnnotatedNode(this.root, a);
+          return this._findAnnotatedNode(this.root, a);
         }, this);
       }
     },
@@ -185,7 +250,7 @@ TODO(sjmiles): this module should produce either syntactic metadata
     _marshalAnnotatedListeners: function() {
       this._notes.forEach(function(a) {
         if (a.events && a.events.length) {
-          var node = this.findAnnotatedNode(this.root, a);
+          var node = this._findAnnotatedNode(this.root, a);
           a.events.forEach(function(e) {
             this.listen(node, e.name, e.value);
           }, this);
