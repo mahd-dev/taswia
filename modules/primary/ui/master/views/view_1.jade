@@ -1,0 +1,26 @@
+doctype html
+html(lang='')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title mahd - taswia
+    script(src='/socket.io/socket.io.js')
+    script(src='/public/iosync/json-patch.js')
+    script(src='/public/iosync/iosync.js')
+    link(rel='import', href='/public/assets/bower_components/polymer/polymer.html')
+    script(src='/public/assets/bower_components/jquery/dist/jquery.min.js')
+    link(rel='import', href='/public/components/master/master-layout.html')
+    link(rel='stylesheet', href='/public/assets/fonts/noto/font.css')
+    style.
+      html{
+        font-family: "NotoKufiArabic";
+      }
+      .material-icons{
+        height: 0.7em;
+      }
+      body{
+        overflow-y: hidden !important;
+      }
+  body(unresolved='')
+    master-layout(wide='true', dir='ltr')
+      .page!= content

@@ -1,18 +1,18 @@
 <dom-module id="master-layout">
 
-  <link rel="stylesheet" href="/assets/bower_components/angular-material/angular-material.min.css">
-  <link rel="stylesheet" href="/assets/css/material-design-icons.min.css">
+  <link rel="stylesheet" href="/public/assets/bower_components/angular-material/angular-material.min.css">
+  <link rel="stylesheet" href="/public/assets/css/material-design-icons.min.css">
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="sidenav.css">
 
-  
+
   <template>
     <md-content flex layout-align="start start" ng-app="master-layout-app" ng-controller="master-layout-ctrl" class="main-container" ng-class="{'mobile': lock_sidenav, 'wide_layout': wide_layout, 'done': done}">
       <md-toolbar layout="row" class="main-toolbar md-whiteframe-z1" ng-class="{'md-tall': lock_sidenav}" md-scroll-shrink="{{!lock_sidenav}}">
         <div class="md-toolbar-tools">
 
-          <img src="/assets/img/logo-dark.svg" alt="logo" class="md-toolbar-logo"/>
+          <img src="/public/assets/img/logo-dark.svg" alt="logo" class="md-toolbar-logo"/>
           <span class="logo-text">taswia</span>
 
           <md-button ng-if="wide_layout" class="md-icon-button" aria-label="menu toggler" ng-click="toggle_sidenav()">
@@ -59,7 +59,7 @@
               </md-button>
               <md-menu-content>
                 <md-menu-item>
-                  <md-button ng-click="doSomething()">Do Something</md-button>
+                  <md-button ng-click="logout()">Logout</md-button>
                 </md-menu-item>
               </md-menu-content>
             </md-menu>
@@ -94,7 +94,7 @@
 
         <div flex layout="column" class="content" ng-class="{'margin': lock_sidenav}">
           <md-content flex class="page paper md-whiteframe-z1" layout-padding>
-            <content select=".page"></content>
+            <content select=".page" bind-unsafe-html="unsafeString"></content>
           </md-content>
           <div class="md-caption footer" layout="row" layout-align="end center" ng-class="{'mobile': !lock_sidenav}">
             <span>Crafted with love <i class="material-icons md-captiont">favorite</i>, by mahd</span>
@@ -105,12 +105,12 @@
     </md-content>
   </template>
 
-  <script src="/assets/bower_components/angular/angular.min.js"></script>
-  <script src="/assets/bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="/assets/bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="/public/assets/bower_components/angular/angular.min.js"></script>
+  <script src="/public/assets/bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="/public/assets/bower_components/angular-aria/angular-aria.min.js"></script>
 
-  <script src="/assets/bower_components/angular-material/angular-material.min.js"></script>
-  <script src="/assets/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/public/assets/bower_components/angular-material/angular-material.min.js"></script>
+  <script src="/public/assets/bower_components/jquery/dist/jquery.min.js"></script>
 
   <script src="script.js"></script>
 

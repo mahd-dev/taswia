@@ -1,6 +1,8 @@
 
 var me; // polymer element
 var shared_scope;
+var shared_compile;
+
 Polymer({
   is: "master-layout",
   properties: {
@@ -13,6 +15,11 @@ Polymer({
       type: String,
       notify: true,
       observer: '_dirChanged'
+    },
+    url: {
+      type: String,
+      notify: true,
+      observer: '_urlChanged'
     }
   },
   _wideChanged: function (val) {
@@ -36,6 +43,12 @@ Polymer({
       shared_scope.$apply(); // update ui
     }
   },
+  _urlChanged: function (val) {
+    $.get(val, function (rslt) {
+      shared_compile($(".page", $(me)).html(rslt))(shared_scope);
+    });
+  },
+
   created: function () {
 
     me = this; // set polymer element
@@ -87,7 +100,7 @@ var initAngular = function () {
   });
 
   // handling sidenav open & close
-  var controller = module.controller('master-layout-ctrl', function ($scope, $mdSidenav, $mdMedia) {
+  var controller = module.controller('master-layout-ctrl', function ($scope, $mdSidenav, $mdMedia, $compile) {
     $scope.lock_sidenav = $mdMedia('gt-md');
     $scope.toggle_sidenav = function () {
       if(!$mdMedia('gt-md')) {
@@ -139,7 +152,17 @@ var initAngular = function () {
       }
     }
 
+    $scope.logout = function () {
+      iosync.logout(function (rslt) {
+        if(!rslt.error){
+          $(me).removeAttr('wide');
+          $(me).attr('url', rslt.redirect);
+        }else console.log(rslt);
+      });
+    }
+
     shared_scope = $scope;
+    shared_compile = $compile;
     scope_ready();
     shared_scope.done = true;
   });

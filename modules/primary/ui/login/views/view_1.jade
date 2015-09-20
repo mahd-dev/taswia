@@ -1,48 +1,15 @@
-doctype html
-html.no-js(lang='en')
-  head
-    meta(charset='utf-8')
-    title Login - taswia
-    meta(name='description', content='')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/assets/css/font-awesome.min.css')
-    link(rel='stylesheet', href='/assets/css/materialize.css')
-    link(rel='stylesheet', href='/assets/css/main.css')
-    link(rel='stylesheet', href='/assets/css/custom.css')
-    script(type='text/javascript', src='/assets/js/jquery-2.1.4.min.js')
-    script(type='text/javascript', src='/assets/js/bin/materialize.min.js')
-    script(type='text/javascript', src='/assets/js/app.js')
-  body.layout-material.login
-    .app-container
-      nav.navbar.topnavbar(role='navigation')
-        .navbar-header
-          a.navbar-brand(href='dashboard.html')
-      section
-        .row
-          form.login_form.col.m6.offset-m3.l4.offset-l4.s12
-            .card
-              .row
-                .col.s12
-                  h4.header!= tr.title
-              .row
-                .input-field.col.s12
-                  input#username.validate(type='text', name='username', required)
-                  label(for='username', data-error=tr.username_error)!= tr.username
-              .row
-                .input-field.col.s12
-                  input#password.validate(type='password', name='password', required)
-                  label(for='password', data-error=tr.password_error)!= tr.password
-              .row
-                .input-field.col.s12
-                  button.login_btn.waves-effect.waves-light.btn.right
-                    .preloader-wrapper.small.hide
-                      .spinner-layer.spinner-blue-only.force-white
-                        .circle-clipper.left
-                          .circle
-                        .gap-patch
-                          .circle
-                        .circle-clipper.right
-                          .circle
-                    span!= tr.login_btn
-    .bg-overlay
-    script(type='text/javascript', src='/assets/login/script_1.js')
+form.login_form
+  div(layout='column')
+    md-input-container.username(flex='')
+      label Username
+      input(type='text', name="username", required="")
+      div(ng-messages="", style="display:none;")
+        div(ng-message="invalid") Invalid Username
+    md-input-container.password(flex='')
+      label Password
+      input(type='password', name="password", required="")
+      div(ng-messages="", style="display:none;")
+        div(ng-message="invalid") Incorretc Password
+    div(flex='', layout="row", layout-align="end center")
+      md-button.md-raised.md-primary Login
+script(type='text/javascript', src='/public/assets/login/script_1.js')

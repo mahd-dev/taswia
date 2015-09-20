@@ -45,7 +45,7 @@ app.on('ready', function() {
   //mainWindow.setMenu(null);
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('http://localhost:3000/polymer');
+  mainWindow.loadUrl('http://localhost:3000/login');
 
   var fs = require('fs');
   mainWindow.webContents.on("did-finish-load", function() {
