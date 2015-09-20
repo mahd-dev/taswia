@@ -3,7 +3,6 @@ $("[name=username]").focus();
 
 $(".login_form").submit(function (e) {
   e.preventDefault();
-  console.log(e);
   $(".login_form [ng-messages]").hide();
   $(".login_form .username").removeClass("md-input-invalid");
   $(".login_form .password").removeClass("md-input-invalid");

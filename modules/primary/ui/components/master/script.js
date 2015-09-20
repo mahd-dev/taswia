@@ -46,6 +46,7 @@ Polymer({
   _urlChanged: function (val) {
     $.get(val, function (rslt) {
       shared_compile($(".page", $(me)).html(rslt))(shared_scope);
+      history.pushState({href: val}, document.title, val);
     });
   },
 
@@ -53,6 +54,12 @@ Polymer({
 
     me = this; // set polymer element
     initAngular(); // start angular initialisation
+
+    $(window).bind("popstate", function(e) {
+      $.get((e.originalEvent.state?e.originalEvent.state.href:location.href), function (rslt) {
+        shared_compile($(".page", $(me)).html(rslt))(shared_scope);
+      });
+    });
 
   },
   attached: function () {
