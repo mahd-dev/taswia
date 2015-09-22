@@ -45,10 +45,10 @@ Polymer({
   },
   _urlChanged: function (val) {
     var ds = Date.now();
-    $.get(val, function (rslt) {
-      console.log("ajax : " + (Date.now() - ds));
-      shared_compile($(".page", $(me)).html(rslt))(shared_scope);
-      history.pushState({href: val}, document.title, val);
+    iosync.query(val, {}, function (rslt) {
+      console.log(Date.now()-ds);
+      shared_compile($(".page", $(me)).html(rslt.content))(shared_scope);
+      history.pushState({href: val}, rslt.title || document.title, val);
     });
   },
 

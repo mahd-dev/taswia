@@ -8,27 +8,9 @@ module.exports = {
       }else res.redirect('/login');
     });
 
-    mod.server.iosync.on('login', function (data, session, callback) {
-      mod.db.findone("user", { username: data.username }, [], [], 0, function (err, user){
-        if (err == null) {
-          if (user) {
-            if (data.password == user.password) {
-              callback({
-                user: {
-                  id: user._id,
-                  privileges: user.privileges
-                },
-                client_params: {
-                  redirect: "/"
-                }
-              });
-            } else callback({error: "invalid_password"});
-          } else callback({error: "username_not_exist"});
-        } else callback({error: "unhandled"});
-      });
-    });
-    mod.server.iosync.on('logout', function (session, callback) {
-      callback({client_params: {redirect: "/login"}});
+    mod.server.iosync.middleware("", function (url, params, session, next, end) {
+      if(session.user || url == "/login") next();
+      else mod.server.iosync.redirect("/login", params, session, end);
     });
 
     mod.server.router.use('/public/assets', mod.server.express.static(__dirname + '/assets'));

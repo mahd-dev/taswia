@@ -7,12 +7,10 @@ $(".login_form").submit(function (e) {
   $(".login_form .username").removeClass("md-input-invalid");
   $(".login_form .password").removeClass("md-input-invalid");
 
-  var ds = Date.now();
   iosync.login({
     username: $("[name=username]", $(this)).val(),
     password:$("[name=password]", $(this)).val()
   }, function (rslt) {
-    console.log("socket : " + (Date.now() - ds));
     if(!rslt.error){
       $("master-layout").attr({
         "wide": true,
