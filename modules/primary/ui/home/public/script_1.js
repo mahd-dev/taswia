@@ -1,3 +1,9 @@
-$(document).ready(function() {
-  $("[data-container]").prependTo($("[data-container]").attr("data-container"));
+console.log("aa");
+
+iosync.bind("/test", function (val, patches) {
+  $("#input").val(val).trigger('change').focus();
+});
+
+$("#input").keyup(function() {
+  iosync.patch("/test", $("#input").val());
 });

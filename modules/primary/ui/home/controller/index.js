@@ -9,3 +9,14 @@ mod.server.iosync.query("/", function (params, session, callback) {
     content: mod.server.jade.renderFile(mod.server.path.resolve(__dirname + "/../views/view_1.jade"))
   });
 });
+
+
+var test = "default value";
+mod.server.iosync.bind("/test", "global",
+function (callback) {
+  callback(test);
+},
+function (patch) {
+  test = patch.value;
+  console.log(patch);
+});

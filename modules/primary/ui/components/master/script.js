@@ -44,9 +44,7 @@ Polymer({
     }
   },
   _urlChanged: function (val) {
-    var ds = Date.now();
     iosync.query(val, {}, function (rslt) {
-      console.log(Date.now()-ds);
       shared_compile($(".page", $(me)).html(rslt.content))(shared_scope);
       history.pushState({href: val}, rslt.title || document.title, val);
     });
@@ -58,8 +56,8 @@ Polymer({
     initAngular(); // start angular initialisation
 
     $(window).bind("popstate", function(e) {
-      $.get((e.originalEvent.state?e.originalEvent.state.href:location.href), function (rslt) {
-        shared_compile($(".page", $(me)).html(rslt))(shared_scope);
+      iosync.query((e.originalEvent.state?e.originalEvent.state.href:location.href), {}, function (rslt) {
+        shared_compile($(".page", $(me)).html(rslt.content))(shared_scope);
       });
     });
 
@@ -126,10 +124,11 @@ var initAngular = function () {
     $scope.search = function () {
       if($scope.toggle_search){
         var q = $(".page-top .search-input input").val();
-        console.log("searching for " + q);
+        iosync.query("/search", {query: q}, function (rslt) {
 
-        // required search query
+          // show results
 
+        })
       }else{
         $scope.toggle_search = true;
         $(".page-top .search-input input").focus();
