@@ -10,6 +10,9 @@ mod.server.iosync.query("/", function (params, session, callback) {
   });
 });
 
+mod.server.iosync.watch("/test", "/test", function (patch) {
+  console.log("patch detected");
+})
 
 var test = "default value";
 mod.server.iosync.bind("/test", "global",

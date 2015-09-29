@@ -1,7 +1,5 @@
-console.log("aa");
-
-iosync.bind("/test", function (val, patches) {
-  $("#input").val(val).trigger('change').focus();
+iosync.bind("/test", function (value, patches) {
+  if(patches[0].source=="server") $("#input").val(value).trigger('change').focus();
 });
 
 $("#input").keyup(function() {
