@@ -2,6 +2,7 @@
 var me; // polymer element
 var shared_scope;
 var shared_compile;
+var fl=true;
 
 Polymer({
   is: "master-layout",
@@ -45,6 +46,10 @@ Polymer({
   },
   _urlChanged: function (val) {
     iosync.query(val, {}, function (rslt) {
+      if(fl){
+        $(".page", $(me)).html(rslt.content);
+        fl=false;
+      }
       shared_compile($(".page", $(me)).html(rslt.content))(shared_scope);
       history.pushState({href: val}, rslt.title || document.title, val);
     });

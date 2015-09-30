@@ -13,8 +13,8 @@ $(".login_form").submit(function (e) {
   }, function (rslt) {
     if(!rslt.error){
       $("master-layout").attr({
-        "wide": true,
-        "url": rslt.redirect
+        wide: true,
+        url: rslt.redirect
       });
     } else if (rslt.error=="username_not_exist") {
       $(".login_form .username").addClass("md-input-invalid");
